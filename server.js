@@ -74,6 +74,36 @@ app.delete("/fruits/:id", (req, res) => {
   fruits.splice(id, 1);
   res.redirect("/fruits");
 });
+
+//EDIT ROUTE - Render a Form tp edit specific fruit
+//Get to fruits/:id/edit
+//render a form with existing values to edit
+
+app.get("/fruits/:id/edit", (req, res) => {
+  const id = req.params.id;
+  const fruit = fruits[id];
+
+  res.render("edit.ejs", { fruit, id });
+});
+
+//Update route - Recieves form data, updates the fruit
+//Put to /fruts/:id
+//updates specifies fruit
+app.put("/fruits/:id", (req, res) => {
+  const id = req.params.id;
+  const body = req.body;
+
+  if (body.readyToEat === "on") {
+    body.readyToEat = true;
+  } else {
+    body.readyToEat = false;
+  }
+  //swap old with new
+  fruits[id] = body;
+
+  //redirect
+  res.redirect("/fruits");
+});
 // fruits show route
 // get request to /fruits/:id
 // return a single fruit
@@ -89,7 +119,7 @@ app.get("/fruits/:id", (req, res) => {
   // res.render(template, data)
   // for the template assume "/views/"
   // "show.ejs" =>  ./views/show.ejs
-  res.render("show.ejs", { fruit });
+  res.render("show.ejs", { fruit, id });
   // {fruit} is the same as {fruit:fruit}
 });
 
