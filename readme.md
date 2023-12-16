@@ -22,11 +22,13 @@ Framework: A system of libraries, practices and conventions that'll make buildin
 Write servers in node from scratch can be tricky and there are several frameworks created in the node ecosystem.
 
 minimalist (basic routing functionality)
+
 - express (most popular)
 - koa
 - fastify
 
 battery included frameworks
+
 - NestJS
 - FoalTS
 - Sails
@@ -47,12 +49,13 @@ battery included frameworks
 ```
 
 - create a new node project (package.json) create it by running `npm init -y`
-    npm: node package manager
-    init: to initiatlize a new package.json
-    -y: accept all default values
+  npm: node package manager
+  init: to initiatlize a new package.json
+  -y: accept all default values
 
 - If not already installed, install nodemon globally (`npm install -g nodemon`)
-    - nodemon is a tool that will turn on file watchers when you run a program, if you update a file, it'll restart
+
+  - nodemon is a tool that will turn on file watchers when you run a program, if you update a file, it'll restart
 
 - update the scripts in your package.json
 
@@ -76,8 +79,7 @@ _Note: the --watch flag is for new versions of node_
 // require('thing'): it will return the exported value of the library or file we specify
 
 //import the express library
-const express = require("express")
-
+const express = require("express");
 
 //*************************** */
 // Create Express Application Object
@@ -85,14 +87,12 @@ const express = require("express")
 //**************************** */
 // express(): returns an express application object
 
-const app = express()
-
+const app = express();
 
 //**************************** */
 // MIDDLEWARE
 // Special Utilities that run before our routes
 //****************************+ */
-
 
 //*****************************
 // ROUTES
@@ -107,14 +107,12 @@ const app = express()
 // req (request): an object with details about the request
 // res (response): an object with functions to send the response
 app.get("/", (req, res) => {
-    // res.send(something) will send the response based on the input
-    // an html string: will send back as html
-    // js array or object: will send back json
-    // string: sends back as text
-    res.send("<h1>Hello World</h1>")
-})
-
-
+  // res.send(something) will send the response based on the input
+  // an html string: will send back as html
+  // js array or object: will send back json
+  // string: sends back as text
+  res.send("<h1>Hello World</h1>");
+});
 
 // *****************************
 // TURNING ON SERVER LISTENER
@@ -123,25 +121,25 @@ app.get("/", (req, res) => {
 // *****************************
 // app.listen(PORT, FUNCTION)
 // The function will run after the server turns on
-app.listen(3000, () => {console.log("server is listening on port 3000")})
+app.listen(3000, () => {
+  console.log("server is listening on port 3000");
+});
 ```
 
 boiled down
 
 ```js
+const express = require("express");
 
-const express = require("express")
-
-
-const app = express()
-
+const app = express();
 
 app.get("/", (req, res) => {
-    res.send("<h1>Hello World</h1>")
-})
+  res.send("<h1>Hello World</h1>");
+});
 
-
-app.listen(3000, () => {console.log("server is listening on port 3000")})
+app.listen(3000, () => {
+  console.log("server is listening on port 3000");
+});
 ```
 
 ## properties of req
@@ -160,3 +158,15 @@ app.listen(3000, () => {console.log("server is listening on port 3000")})
 - `res.render()` will render a view in a "views" folder using a templating library matching the file extension (.ejs). Can send data as a second argument to be used when rendering the view.
 
 - `res.json()` will respond with json
+
+### Tips
+
+- Thunderclient and curl can used to test routes without an internet browser
+
+- If you need to kill a process on a certain port
+
+```
+kill $(lsof -t -i :xxxx)
+```
+
+\*replace xxxx with the port number
